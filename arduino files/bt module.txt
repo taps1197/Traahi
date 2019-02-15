@@ -1,0 +1,79 @@
+#include<SoftwareSerial.h>
+SoftwareSerial BT(9,10);
+
+
+int m1_forward =4;
+int m1_back = 5;
+int m1_left = 6;
+int m1_right = 7;
+
+void setup() {
+  BT.begin(9600);
+  for (int i = 4; i <= 7; i++)
+  {
+    pinMode(i, OUTPUT);
+  }
+  Serial.begin(9600);
+
+}
+int x;
+void loop()
+{
+  if (BT.available())
+  {
+
+    
+    x = BT.read();
+    Serial.write(x);
+  }
+    if (x == 'F')
+    {
+      Serial.println("car is going forward");
+      digitalWrite(4, HIGH);
+      digitalWrite(5, LOW);
+      digitalWrite(6, LOW);
+      digitalWrite(7, HIGH);
+
+    }
+    if (x == 'B')
+    {
+      Serial.println("car is going backward");
+      digitalWrite(4, LOW);
+      digitalWrite(5, HIGH);
+      digitalWrite(6, HIGH);
+      digitalWrite(7, LOW);
+
+    }
+    if (x == 'R')
+    {
+      Serial.println("car is going right");
+      digitalWrite(4, LOW);
+      digitalWrite(5, HIGH);
+      digitalWrite(6, LOW);
+      digitalWrite(7, HIGH);
+
+    }
+    if (x == 'L')
+    {
+
+      Serial.println("car is going left");
+      digitalWrite(4, HIGH);
+      digitalWrite(5, LOW);
+      digitalWrite(6, HIGH);
+      digitalWrite(7, LOW);
+
+
+    }
+    if (x == 's')
+    {
+      Serial.println("car stopped");
+      digitalWrite(4, HIGH);
+      digitalWrite(5, HIGH);
+      digitalWrite(6, HIGH);
+      digitalWrite(7, HIGH);
+
+    }
+
+
+  }
+
