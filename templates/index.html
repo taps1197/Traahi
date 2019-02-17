@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <title>EMRP</title>
+         <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="static/angular-material.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular-messages.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+
+<script  src="static/angular_material.js"></script>
+
+ <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+<script>
+      // Initialize Firebase
+     
+
+angular
+      .module('myApp', ['ngMaterial'])
+      .controller('mainController', function($scope) {
+
+          //js starts..........
+ var config = {
+            apiKey: "AIzaSyBeTznk_RhBzeaOGcZm566n4nltdKu-1u0",
+            authDomain: "merp-genhax.firebaseapp.com",
+            databaseURL: "https://merp-genhax.firebaseio.com",
+            projectId: "merp-genhax",
+            storageBucket: "merp-genhax.appspot.com",
+            messagingSenderId: "801857189882"
+          };
+  firebase.initializeApp(config); 
+  var db=firebase.database();
+        
+
+   $scope.makeACall = function() {
+    //pulling location from GooGle API
+    
+    var loc_obj = {lat:45,log:85}
+
+    // Calling Google Maps Places API.
+
+// close_hosp.predictions[0].reference <--
+
+    var close_hosp ={
+   "predictions" : [
+      {
+         "description" : "Pradyumna Bal Memorial Hospital, Chandaka Industrial Estate, Patia, Bhubaneswar, Odisha, India",
+         "id" : "94a8c72f59dc02da9b49b0b9c10baf05bfd8287a",
+         "matched_substrings" : [
+            {
+               "length" : 8,
+               "offset" : 23
+            },
+            {
+               "length" : 11,
+               "offset" : 68
+            }
+         ],
+         "place_id" : "ChIJfTj5phgJGToR9hgj7G1JhQY",
+         "reference" : "CnRsAAAAOEhVXw5MlwzoMT5hNotshghuHyIFk_bqcF_wlgpGKPxaCPQsP3YldrvVje4krk8vsyPeFJRijin7dNxmpeS6DUvW09iI1fKwMB5XvvS29nLS51C0yYzSJipbZn_nsr02YqtmPZvLO32jnizGHGJhNhIQCEtrhMN_eb6F4fi-7YNMChoUCpjtCLDxkPx7Nfmf68xQxJDFddA",
+         "structured_formatting" : {
+            "main_text" : "Pradyumna Bal Memorial Hospital",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 8,
+                  "offset" : 23
+               }
+            ],
+            "secondary_text" : "Chandaka Industrial Estate, Patia, Bhubaneswar, Odisha, India",
+            "secondary_text_matched_substrings" : [
+               {
+                  "length" : 11,
+                  "offset" : 35
+               }
+            ]
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Pradyumna Bal Memorial Hospital"
+            },
+            {
+               "offset" : 33,
+               "value" : "Chandaka Industrial Estate"
+            },
+            {
+               "offset" : 61,
+               "value" : "Patia"
+            },
+            {
+               "offset" : 68,
+               "value" : "Bhubaneswar"
+            },
+            {
+               "offset" : 81,
+               "value" : "Odisha"
+            },
+            {
+               "offset" : 89,
+               "value" : "India"
+            }
+         ],
+         "types" : [ "establishment" ]
+      },
+      {
+         "description" : "Apollo Hospitals, Sainik School Road, Unit 15, Gajapati Nagar, Bhubaneswar, Odisha, India",
+         "id" : "a0d40304d7d5a4672ca7e4b47044138e7c0a198c",
+         "matched_substrings" : [
+            {
+               "length" : 8,
+               "offset" : 7
+            },
+            {
+               "length" : 11,
+               "offset" : 63
+            }
+         ],
+         "place_id" : "ChIJeQ1HCsMJGToRNgdDa5B5xAc",
+         "reference" : "CnRnAAAAaBacvGzPqBy7LDRnOpj0gaJussVwZHD8J77HfxPJlwSmZvGHylavEEcLYivy2gMIfBd2sUFPSO8KDJaP7odk5itt80gHV7wUcC_g5rIp1SX4hio-uEpmbJa_TJ3P0uGxF8TgjjAErDCcZkIfHy9bwRIQInR-DTqP5n8xCVT-BYCyDhoUzwFXrNOxPw2i-Ox2BkYEzrW0BZQ",
+         "structured_formatting" : {
+            "main_text" : "Apollo Hospitals",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 8,
+                  "offset" : 7
+               }
+            ],
+            "secondary_text" : "Sainik School Road, Unit 15, Gajapati Nagar, Bhubaneswar, Odisha, India",
+            "secondary_text_matched_substrings" : [
+               {
+                  "length" : 11,
+                  "offset" : 45
+               }
+            ]
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Apollo Hospitals"
+            },
+            {
+               "offset" : 18,
+               "value" : "Sainik School Road"
+            },
+            {
+               "offset" : 38,
+               "value" : "Unit 15"
+            },
+            {
+               "offset" : 47,
+               "value" : "Gajapati Nagar"
+            },
+            {
+               "offset" : 63,
+               "value" : "Bhubaneswar"
+            },
+            {
+               "offset" : 76,
+               "value" : "Odisha"
+            },
+            {
+               "offset" : 84,
+               "value" : "India"
+            }
+         ],
+         "types" : [ "establishment" ]
+      },
+      {
+         "description" : "Dr. Sharmili Sinha - Best Hospital in BHUBANESWAR, Laxmi Nagar, Bhubaneswar, Odisha, India",
+         "id" : "d61b1e36092ac16e0bed65680ad2a8d704427d1b",
+         "matched_substrings" : [
+            {
+               "length" : 8,
+               "offset" : 26
+            },
+            {
+               "length" : 11,
+               "offset" : 64
+            }
+         ],
+         "place_id" : "ChIJYf9j65AJGToR3BfqWdua2KM",
+         "reference" : "CnRpAAAApIi46a-90YkBBLFGaluicDxZyTAYVh6MMKUXA6_gaWkrQkyiAiXaki9Y997DwRAM1a9f_ObJqeIijVD15rzLGuUck7qb4XDMrQL37d9yZEZ-idhpbz8xRSXI59JSYycy9ohCY5NBlQPdiGUxcs5vphIQyfYFzrCizMwD35lpZIVYhxoUbKxYf5n9E-9n_hud8HxCp7C9OOo",
+         "structured_formatting" : {
+            "main_text" : "Dr. Sharmili Sinha - Best Hospital in BHUBANESWAR",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 8,
+                  "offset" : 26
+               }
+            ],
+            "secondary_text" : "Laxmi Nagar, Bhubaneswar, Odisha, India",
+            "secondary_text_matched_substrings" : [
+               {
+                  "length" : 11,
+                  "offset" : 13
+               }
+            ]
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Dr. Sharmili Sinha - Best Hospital in BHUBANESWAR"
+            },
+            {
+               "offset" : 51,
+               "value" : "Laxmi Nagar"
+            },
+            {
+               "offset" : 64,
+               "value" : "Bhubaneswar"
+            },
+            {
+               "offset" : 77,
+               "value" : "Odisha"
+            },
+            {
+               "offset" : 85,
+               "value" : "India"
+            }
+         ],
+         "types" : [ "establishment" ]
+      },
+      {
+         "description" : "Hospital, Pathar Bandha Basti, Bhubaneswar, Odisha, India",
+         "id" : "462781b6fb75c50754e8cb412f202a564c791c45",
+         "matched_substrings" : [
+            {
+               "length" : 8,
+               "offset" : 0
+            },
+            {
+               "length" : 11,
+               "offset" : 31
+            }
+         ],
+         "place_id" : "ChIJm2qv1_UJGToRoiSJAXz7MsA",
+         "reference" : "ClRIAAAAnntEqT588A207osQ8VnjiurNjyF4aZBIcuMuKM6TqghIQ2EOa8Oa-2SOGmY5dfMhe54i1wtSOo1-u1-lbgAC8bUXMGq7JGhemYFzEM0HTzgSEBeQ_K2cWxhnF7RKSfb8Xx8aFFlsjQh-Mpo4zJkiHjrgqzcnqQ0o",
+         "structured_formatting" : {
+            "main_text" : "Hospital",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 8,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Pathar Bandha Basti, Bhubaneswar, Odisha, India",
+            "secondary_text_matched_substrings" : [
+               {
+                  "length" : 11,
+                  "offset" : 21
+               }
+            ]
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Hospital"
+            },
+            {
+               "offset" : 10,
+               "value" : "Pathar Bandha Basti"
+            },
+            {
+               "offset" : 31,
+               "value" : "Bhubaneswar"
+            },
+            {
+               "offset" : 44,
+               "value" : "Odisha"
+            },
+            {
+               "offset" : 52,
+               "value" : "India"
+            }
+         ],
+         "types" : [ "establishment" ]
+      }
+   ],
+   "status" : "OK"
+}
+
+//Close Hospital found till here
+
+
+//close_hosp.predictions[0].reference="CnRsAAAAOEhVXw5MlwzoMT5hNotshghuHyIFk_bqcF_wlgpGKPxaCPQsP3YldrvVje4krk8vsyPeFJRijin7dNxmpeS6DUvW09iI1fKwMB5XvvS29nLS51C0yYzSJipbZn_nsr02YqtmPZvLO32jnizGHGJhNhIQCEtrhMN_eb6F4fi-7YNMChoUCpjtCLDxkPx7Nfmf68xQxJDFddA" :This is the refernece Id of the first hospital.returned.
+
+//Starting to find location detials with latitude and longitude.
+
+
+ var loc_detials={
+   "html_attributions" : [],
+   "result" : {
+      "address_components" : [
+         {
+            "long_name" : "Bhubaneswar",
+            "short_name" : "Bhubaneswar",
+            "types" : [ "locality", "political" ]
+         },
+         {
+            "long_name" : "Odisha",
+            "short_name" : "OD",
+            "types" : [ "administrative_area_level_1", "political" ]
+         },
+         {
+            "long_name" : "India",
+            "short_name" : "IN",
+            "types" : [ "country", "political" ]
+         },
+         {
+            "long_name" : "751024",
+            "short_name" : "751024",
+            "types" : [ "postal_code" ]
+         }
+      ],
+      "adr_address" : "KIIT University, \u003cspan class=\"street-address\"\u003eChandaka Industrial Estate, Patia\u003c/span\u003e, \u003cspan class=\"locality\"\u003eBhubaneswar\u003c/span\u003e, \u003cspan class=\"region\"\u003eOdisha\u003c/span\u003e \u003cspan class=\"postal-code\"\u003e751024\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eIndia\u003c/span\u003e",
+      "formatted_address" : "KIIT University, Chandaka Industrial Estate, Patia, Bhubaneswar, Odisha 751024, India",
+      "formatted_phone_number" : "0674 230 4400",
+      "geometry" : {
+         "location" : {
+            "lat" : 20.3519386,
+            "lng" : 85.8133424
+         },
+         "viewport" : {
+            "northeast" : {
+               "lat" : 20.3532875802915,
+               "lng" : 85.81469138029149
+            },
+            "southwest" : {
+               "lat" : 20.3505896197085,
+               "lng" : 85.81199341970849
+            }
+         }
+      },
+      "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/doctor-71.png",
+      "id" : "94a8c72f59dc02da9b49b0b9c10baf05bfd8287a",
+      "international_phone_number" : "+91 674 230 4400",
+      "name" : "Pradyumna Bal Memorial Hospital",
+      "opening_hours" : {
+         "open_now" : true,
+         "periods" : [
+            {
+               "open" : {
+                  "day" : 0,
+                  "time" : "0000"
+               }
+            }
+         ],
+         "weekday_text" : [
+            "Monday: Open 24 hours",
+            "Tuesday: Open 24 hours",
+            "Wednesday: Open 24 hours",
+            "Thursday: Open 24 hours",
+            "Friday: Open 24 hours",
+            "Saturday: Open 24 hours",
+            "Sunday: Open 24 hours"
+         ]
+      },
+      "photos" : [
+         {
+            "height" : 2182,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/100513518084062957052/photos\"\u003eAnurag Singh\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAALttsQmsLsx1fjA-UPCj_PEfnzunxwJo6anZC5MxKCGDK1qCc0pIEmhfDFxzJ22-M_IRzbOzSoVk-zklf4pDpZnnk4Vw6l62J-ZUnJ_1Ykz7rM0TGCDQqFz7-Lp26VG0lEhBmDu97mh0PJmSENXxBRtIBGhR8glMg3_AFwZsOTiw0bFkAtLWX7g",
+            "width" : 3987
+         },
+         {
+            "height" : 3456,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/113121761526944756800/photos\"\u003eTRUPTIMAYA BISHWAL\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAnMpQSSwzYXWoMrLXxZE7ViYkFIGJiSk1vTwoZBSJoQhTzsMjWnVGeRmviSbrPTXXAECImrv0A-911JGqffcuuTMb40ui0KzcEFJLRqMK82Dfo9nabMaLH-micgw1abMZEhAeAifVFg_yIpKicQgjpYhuGhQWSKYKDVTICBm0ITqlbLCxYIhwUw",
+            "width" : 4608
+         },
+         {
+            "height" : 3120,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/100190178501563421881/photos\"\u003eMdminhaj Ansari\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAATQ_KoJSRkPKnaYRY8TJaM9dBaB5dfGRLZ9fjaws1HdtmoNbY8gnGwXU4LcohDpywxDrVCriFnZzeRmckzZnkgHInjOHtta9lHkuZm8YlqmW6ml6CERlMiXfPHjVdEGT2EhAudIblOOXaSjoW6hQPjxA1GhSEJIbaEjbiLr6RpFAfiZR1ZqvrOg",
+            "width" : 4160
+         },
+         {
+            "height" : 3120,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/101285635801582341248/photos\"\u003eSitikantha Mahapatra\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAOmj5vSWqU4G5t3BHzRQASoMP0argJ3fE-Ym-L8xWZVQSGa1M5umxjLBCzFW524n9y7q2iio-jHck-V7yaITb5cVunN05qQjzSTBZzSzhOyrlOx6VELH15vvoaKy6SVeaEhD_nR_4UHbODbZ2nqa83O9AGhQZq0hSgS_Dt4QAltmMIKzjqrrFBA",
+            "width" : 4160
+         },
+         {
+            "height" : 3120,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/108302555378126937859/photos\"\u003eKirteemayee Roul\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAA8ECgRCQL92xmN3Bdqvt6C0OMSHK9c1N6BHVtfNrvKiuM-U6_wSQbRyqWmZRT7P94fs03spBh-PYpQUlQ3MDos7Eq-Gn6F5bpwrADJlWe8AtiZByVJaGEg1l9tOm78hW9EhBcSVy1YtEM00EJDi6QCOYpGhRcyDk3Vm2PyekESFAhx2x8EC3AzA",
+            "width" : 4160
+         },
+         {
+            "height" : 1920,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/112235871482662979360/photos\"\u003eShree Jagannath\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAP6ljx9rIumkQi8WtyaoTJrXlXlrzni2vqEefEMLYiOL8aPW8nY0a7_1r3jVRVBMkm5s5s4Sk51cr5J0dJRguSE1cBdpeueMKQ-Pkxvnaz2zGLS4HkOiI4IxSEYKx7tTGEhAZmIyQGraYjO4h9wNve9LrGhTbpUDNzvwC-2tbnaUeAaL0pXCsCA",
+            "width" : 1080
+         },
+         {
+            "height" : 1836,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/100513518084062957052/photos\"\u003eAnurag Singh\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAFQ5IGXl-IwHwsUiw5nWPOZwvZFbXHYujideCw2nBtvjO6RHnclt7Atof1H9hSTFTjF2-gtbuPA9e37IQ8rTTZfkC3z5E6tU9vchjKq_Fy-hnYh1uC2pvJnEICasqqdDSEhC750-3JD3F7cSnjYCYDhuxGhS5haEJLAERSngBRj8ZuKO5YwHPPQ",
+            "width" : 3264
+         },
+         {
+            "height" : 2246,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/100513518084062957052/photos\"\u003eAnurag Singh\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAYu_EYqrry50O1KzRKdkAmMcoILqG3_bqg5fYwiQiAF2S-inKCJHu8-8NVAyuhx4QRyFAP-u4YCk3d3tbU_akRBbIC7SzfpFoGHYwUKLyCGDpuXjUbgo7ubchG02euWImEhAR-G_YbhnqHDfQ1P7_SC_yGhSC-6oDlifkRESTWZRQKN-e8YLYIg",
+            "width" : 3323
+         },
+         {
+            "height" : 2976,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/107698356038556422481/photos\"\u003eDebjit Ghosh\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAAfuVCUS0gIdl89hnA4gmo9AvVs3iMseKfMKkdCKAVtuj1PjcAm4etOoJxUFgOwsrtkRLBg3lXtl0WwqRNrmPlBtXsZ5Cr7pbUwoVLv74ykbqL8X3AXBAYmK0_7BQD-zQREhDyPVd5bqWt91aYtnV7lZ9VGhR7TcqoGpQZzCwHFiVdze-rk82Ztg",
+            "width" : 3968
+         },
+         {
+            "height" : 2304,
+            "html_attributions" : [
+               "\u003ca href=\"https://maps.google.com/maps/contrib/106686993898178686191/photos\"\u003eAjit Kumar Das\u003c/a\u003e"
+            ],
+            "photo_reference" : "CmRaAAAA5jNP58889yR80ofh5rOKLG1ipoOYso3rY1uB8YUfcLyp8VBfzI8S-HoiwllgFXYQGj3QpZ9JHxyZX6bwhAwbwlsuOgGF1Mo-HGrQgBbznlb4dQewg30CbFx_acJilBLaEhC-2FHqprEch6rOEjcZLT8FGhTc2xSqmizxmaP8HmWKXsclQ-bXfw",
+            "width" : 4096
+         }
+      ],
+      "place_id" : "ChIJfTj5phgJGToR9hgj7G1JhQY",
+      "plus_code" : {
+         "compound_code" : "9R27+Q8 Bhubaneswar, Odisha, India",
+         "global_code" : "7MG79R27+Q8"
+      },
+      "rating" : 3.7,
+      "reference" : "CmRRAAAAceAo7xQp_tyNjegoJE4bYmsECmUikwz0O1XPGFgu6wz3_qIhL7dCb4GwcXbBXbA7dYqHON2eixF73xeE5_Tzqkdvr_YchP7NxeBVblZzM7vMehTLzNT_jgUO1Ufk5e2oEhDUtWw3OM81KxsspHNIHtAUGhTrdNmkLA1Bi9PuNz_3K-zwZSp5iQ",
+      "reviews" : [
+         {
+            "author_name" : "Chinmayee Harichandan",
+            "author_url" : "https://www.google.com/maps/contrib/106503275579238333404/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh3.googleusercontent.com/-_mldahj-ZA0/AAAAAAAAAAI/AAAAAAAAADU/-nmKCO1_gg4/s128-c0x00000000-cc-rp-mo/photo.jpg",
+            "rating" : 1,
+            "relative_time_description" : "2 weeks ago",
+            "text" : "Very disappointed with the service provided.Although we were in the line from  morning 7:30 and when the gate opened at 8 the staff reserved 3 seats as  blank and told us that was for management  who were even not present in the hospital.\n\nThe most important,the staff who is doing the registration was not serious about his work and they even don't  felt guilty about the mistake .My name was completely different in the billing and they are arguing its because of system.",
+            "time" : 1533208542
+         },
+         {
+            "author_name" : "Prakash Nayak",
+            "author_url" : "https://www.google.com/maps/contrib/107295344604461532811/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh6.googleusercontent.com/-AF5iv8nxDlw/AAAAAAAAAAI/AAAAAAAAAJo/vf-33b_GFYA/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+            "rating" : 4,
+            "relative_time_description" : "a week ago",
+            "text" : "NYC management..NYC hospital..BT  service provide vry poor..BT vry good doctor are available...",
+            "time" : 1533585775
+         },
+         {
+            "author_name" : "Asit Dash",
+            "author_url" : "https://www.google.com/maps/contrib/108767235101167412122/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh4.googleusercontent.com/-TtQmP0WURBY/AAAAAAAAAAI/AAAAAAAAAAA/APUIFaP8kjxqGDmpV3ytsQy7SSwpDVwmoQ/s128-c0x00000000-cc-rp-mo/photo.jpg",
+            "rating" : 1,
+            "relative_time_description" : "a month ago",
+            "text" : "Very bad service at hospital. Female patient has no privacy. In Ultrasound cabin there is no privacy, numbers of male persons are coming inside unnecessarily making very uncomfortable and irritation to female patient. Doctors are not freindly also. They do not see the reports properly. One person will waste money and time at KIMS hospital. I would suggest all to be carefull for your female patient at KIMS hospital if you go for pregnancy checkup.\nOne should not be influenced by infrastructures which is not more important than quality of doctors, staff behaviours and privacy of female patients.",
+            "time" : 1531899932
+         },
+         {
+            "author_name" : "Pramod Kumar Biswal",
+            "author_url" : "https://www.google.com/maps/contrib/116813105007218591952/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh6.googleusercontent.com/-kBk8SkbrCsw/AAAAAAAAAAI/AAAAAAAAABs/HtGX5THk-2U/s128-c0x00000000-cc-rp-mo/photo.jpg",
+            "rating" : 1,
+            "relative_time_description" : "2 weeks ago",
+            "text" : "Miss Chinmayee Harichandan this type of situation also happened  with me and also my friend ...",
+            "time" : 1533209330
+         },
+         {
+            "author_name" : "Shree Jagannath",
+            "author_url" : "https://www.google.com/maps/contrib/112235871482662979360/reviews",
+            "language" : "en",
+            "profile_photo_url" : "https://lh4.googleusercontent.com/-XnXsOKjhBAI/AAAAAAAAAAI/AAAAAAAAAAA/APUIFaNHcK5zwt4mIoYnZJtrtVtjihHZQQ/s128-c0x00000000-cc-rp-mo-ba5/photo.jpg",
+            "rating" : 4,
+            "relative_time_description" : "3 months ago",
+            "text" : "Medical College And hospital. Affrdeble price. Nice management.",
+            "time" : 1526533481
+         }
+      ],
+      "scope" : "GOOGLE",
+      "types" : [ "hospital", "point_of_interest", "establishment" ],
+      "url" : "https://maps.google.com/?cid=469862472592070902",
+      "utc_offset" : 330,
+      "vicinity" : "KIIT University, Chandaka Industrial Estate, Patia, Bhubaneswar",
+      "website" : "http://www.kims.ac.in/"
+   },
+   "status" : "OK"
+}
+
+// Location detials ends here
+
+// var position
+
+var hosp_position= loc_detials.result.geometry.location = {
+            "lat" : 20.3519386,
+            "lng" : 85.8133424
+         }
+
+var phone_no = loc_detials.result.formatted_phone_number;
+
+var rr = confirm("Making Call to "+phone_no);
+
+if(rr == true){
+  
+}
+
+
+
+     db.ref('incoming/doctorcall').set('Y');
+   }
+
+
+  db.ref('incoming/doctorrecieve').on('value',function(snapshot){
+  
+    if(snapshot.val()=='Y')
+    {
+      document.getElementById('link').style.display="block"
+    }
+    else
+    {
+     document.getElementById('link').style.display="none"
+    }
+  });
+ 
+      // Initialize Firebase
+     
+    $scope.pickup = function(){
+      db.ref('incoming/doctorrecieve').set('Y')
+      window.open('videochat.html')
+    }
+
+
+
+
+        //js ends.............
+
+
+      });
+
+
+
+
+  </script>
+
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="mainController">
+
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        
+
+        <h2 flex md-truncate>MERP</h2>
+
+        
+      </div>
+    </md-toolbar>
+    <div>
+    <img  style="width:100%" src="static/banner.jpg"/>
+    </div>
+    <md-button  class="md-raised md-warn" style="width:95%;margin-top:5%" href="https://13.126.171.111:5000/videochat">SOS</md-button>
+    
+    <br>
+    <div id="link" style="display:none">
+      <iframe src="http://13.126.171.111:5000/videochat" height="570px" width="1300px">
+      </iframe>
+    </div>
+
+    <a  class="button" href="tel://123456"></a>
+
+    </div>
+    
+  </body>
+</html>
+

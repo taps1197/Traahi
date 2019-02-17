@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <title>{{ title }}</title>
+      <link rel="stylesheet" href="static/styles.css"> 
+  </head>
+  <body>
+    {{ content }}
+    <button onclick="makeACall()">Click here</button>
+    <div id="link" style="display:none">
+      <iframe src="http://127.0.0.1:5000/videochat" height="570px" width="1300px">
+      </iframe>
+    </div>
+
+    <div id="charContainer" style="width:100%">
+
+      </div>
+
+  <button onclick="UberRestFulApi()"></button>
+
+  </body>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+      var config = {
+            apiKey: "AIzaSyBeTznk_RhBzeaOGcZm566n4nltdKu-1u0",
+            authDomain: "merp-genhax.firebaseapp.com",
+            databaseURL: "https://merp-genhax.firebaseio.com",
+            projectId: "merp-genhax",
+            storageBucket: "merp-genhax.appspot.com",
+            messagingSenderId: "801857189882"
+          };
+  firebase.initializeApp(config); 
+  var db=firebase.database();
+ 
+
+   function makeACall() {
+     db.ref('incoming/doctorcall').set('Y');
+   }
+
+
+  db.ref('incoming/doctorrecieve').on('value',function(snapshot){
+  
+    if(snapshot.val()=='Y')
+    {
+      document.getElementById('link').style.display="block"
+      //ajax get call to    https://api.fitbit.com/1/user/-/activities/heart/date/today/1d.json
+
+      //response {
+    var  patResponse = {"activities-heart": [
+        {
+            "dateTime": "2015-08-04",
+            "value": {
+                "customHeartRateZones": [],
+                "heartRateZones": [
+                    {
+                        "caloriesOut": 740.15264,
+                        "max": 94,
+                        "min": 30,
+                        "minutes": 593,
+                        "name": "Out of Range"
+                    },
+                    {
+                        "caloriesOut": 249.66204,
+                        "max": 132,
+                        "min": 94,
+                        "minutes": 46,
+                        "name": "Fat Burn"
+                    },
+                    {
+                        "caloriesOut": 0,
+                        "max": 160,
+                        "min": 132,
+                        "minutes": 0,
+                        "name": "Cardio"
+                    },
+                    {
+                        "caloriesOut": 0,
+                        "max": 220,
+                        "min": 160,
+                        "minutes": 0,
+                        "name": "Peak"
+                    }
+                ],
+                "restingHeartRate": 68
+            }
+        }
+    ]
+}
+
+
+
+Highcharts.chart('charContainer', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Heart Rates'
+    },
+    xAxis: {
+        categories: ['Out-Of-Range', 'Peak', 'Fat Burn', 'Cardio'],
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Beats',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' minutes'
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'max',
+        data: [94, 132, 160, 220]
+    }, {
+        name: 'min',
+        data: [30, 94, 132, 160]
+    }
+    ]
+});
+
+    }
+    else
+    {
+     document.getElementById('link').style.display="none"
+    }
+  });
+
+  </script>
+
+  </script>
+</html>
+
